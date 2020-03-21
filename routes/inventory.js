@@ -1,27 +1,27 @@
 var express = require('express');
 var router = express.Router();
-const supplyRequestController = require('../controllers/supply-request.controller.js');
+const inventoryController = require('../controllers/inventory.controller.js');
 
 // Update password
 router.put('/add', function(req, res, next) {
-  supplyRequestController.add(req, res);
+  inventoryController.add(req, res);
   res.send({status: true});
 });
 
 // Update User Profile
 router.post('/update', function(req, res, next) {
-  supplyRequestController.update(req, res);
+  inventoryController.update(req, res);
   res.send({status: true});
 });
 
 router.get('/view', async function(req, res, next) {
-  let data = await supplyRequestController.view(req, res);
+  let data = await inventoryController.view(req, res);
   res.send({status: true, data: data});
 });
 
 // Login
 router.post('/delete', function(req, res, next) {
-  supplyRequestController.delete(req, res);
+  inventoryController.delete(req, res);
   res.send({status: true});
 });
 

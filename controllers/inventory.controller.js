@@ -1,17 +1,19 @@
 var express = require('express');
+var dataAccess = require('../data-access/mongo.dataaccess');
 
 let inventoryController = {
     add: function(req, res) {
-        console.log('controller called');
+        dataAccess.add(req.app, 'inventory', req.body);
     },
     update: function(req, res) {
-        console.log('controller called');
+        dataAccess.update(req.app, 'inventory', req.body);
     },
     delete: function(req, res) {
-        console.log('controller called');
+        dataAccess.delete(req.app, 'inventory', req.body._id);
     },
-    view: function(req, res) {
-        console.log('controller called');
+    view: async function(req, res) {
+        let data = await dataAccess.view(req.app, 'inventory', req.query._id);
+        return data;
     },
     search: function(req, res) {
         console.log('controller called');

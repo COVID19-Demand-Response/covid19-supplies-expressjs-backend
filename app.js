@@ -8,6 +8,7 @@ var MongoClient = require('mongodb').MongoClient;
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var supplyRequestRouter = require('./routes/supply-requests');
+var inventoryRouter = require('./routes/inventory');
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/supplyRequests', supplyRequestRouter);
+app.use('/inventory', inventoryRouter);
 
 app.constants = {
   db: {
