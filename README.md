@@ -3,11 +3,11 @@
 
 This is an ExpressJS app that is being created to track medical supply needs due to COVID19 and a place for volunteers and makers to add their inventories. Fulfillment strategies for supply requests are still being discussed.
 
-# Prerequisites
+### Prerequisites
 1. MongoDB 4+
 2. NodeJS
 
-# Setup
+### Setup
 1. Download the repo and run npm install.
 2. Once all packages are installed, update the following in app.js to point to your MongoDB instance
 
