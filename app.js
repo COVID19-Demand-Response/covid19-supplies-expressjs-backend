@@ -9,6 +9,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var supplyRequestRouter = require('./routes/supply-requests');
 var inventoryRouter = require('./routes/inventory');
+var auth = require("./security/auth");
+var dbMgr = require('./data-access/db-manager');
 
 var app = express();
 
@@ -21,6 +23,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(auth.initialize());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -51,9 +55,8 @@ app.use(function(err, req, res, next) {
 
 MongoClient.connect(app.constants.db.url, function (err, database) {
   if (err) throw err;
-  app.db = database.db('covid19');
-  
-  app.db.collection('users').find().toArray(function (err, result) {
+  dbMgr.dbConnection = database.db('covid19');
+  dbMgr.dbConnection.collection('users').find().toArray(function (err, result) {
     if (err) throw err;
     console.log('Successfully connect to Mongo instance at ' + app.constants.db.url);
   })

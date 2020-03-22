@@ -1,17 +1,18 @@
 var express = require('express');
 ObjectID = require('mongodb').ObjectID;
+var dbMgr = require('../data-access/db-manager');
 
 let mongoDataAccess = {
-    add: function(app, collection, data) {
+    add: function(collection, data) {
         console.log('Creating record for collection: ' + collection);
-        app.db.collection(collection).insertOne(data);
+        dbMgr.dbConnection.collection(collection).insertOne(data);
     },
-    update: function(app, collection, data) {
+    update: function(collection, data) {
         let id = data._id;
         delete data._id;
         const update = {"$set": data};
         
-        app.db.collection(collection).updateOne({ "_id": new ObjectID(id) }, update, { "upsert": false })
+        dbMgr.dbConnection.collection(collection).updateOne({ "_id": new ObjectID(id) }, update, { "upsert": false })
         .then(result => {
             if(result.matchedCount > 0) {
                 console.log("Updated " + result);
@@ -22,19 +23,19 @@ let mongoDataAccess = {
         })
         .catch(err => console.error(`Failed to add review: ${err}`));
     },
-    delete: function(app, collection, id) {
-        app.db.collection(collection).remove(
+    delete: function(collection, id) {
+        dbMgr.dbConnection.collection(collection).remove(
             { "_id": new ObjectID(id) },
             {
               justOne: true
             }
             );
     },
-    view: async function(app, collection, id) {
+    view: async function(collection, id) {
         let doc = {};
         try {
             id = new ObjectID(id);
-            doc = app.db.collection(collection).findOne(
+            doc = dbMgr.dbConnection.collection(collection).findOne(
                 { "_id": id },
                 {}
                 );
@@ -50,7 +51,26 @@ let mongoDataAccess = {
 
         return doc;
     },
-    search: function(app, collection, criteria) {
+    find: async function(collection, query) {
+        let doc = {};
+        try {
+            doc = dbMgr.dbConnection.collection(collection).findOne(
+                query,
+                {}
+            );
+            await doc.then(doc => {
+                
+            }).catch(err => {
+                doc = {};
+                console.log(err);
+            });
+        } catch(err) {
+            console.log(err);
+        };
+
+        return doc;
+    },
+    search: function(collection, criteria) {
         console.log('controller called');
     }
 };

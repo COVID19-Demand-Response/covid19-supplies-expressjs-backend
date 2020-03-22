@@ -1,33 +1,44 @@
 var express = require('express');
 var dataAccess = require('../data-access/mongo.dataaccess');
 
+// Regular users must only be able to modify / delete their own profile
+// Admin - full access
 let userController = {
     registerUser: function(req, res) {
-        console.log(req.body);
-        dataAccess.add(req.app, 'users', req.body);
+        
+        dataAccess.add('users', req.body);
     },
     unRegisterUser: function(req, res) {
-        dataAccess.delete(req.app, 'users', req.body._id);
+        // Access restriction
+        dataAccess.delete('users', req.body._id);
     },
     updatePassword: function(req, res) {
-        dataAccess.update(req.app, 'users', req.body);
+        // Access restriction
+        dataAccess.update('users', { "_id" : req.body._id, "password": req.body.password});
     },
     updateProfile: function(req, res) {
-        console.log(req.body);
-        dataAccess.update(req.app, 'users', req.body);
+        // Access restriction
+        dataAccess.update('users', req.body);
     },
     viewProfile: async function(req, res) {
-        let data = await dataAccess.view(req.app, 'users', req.query._id);
+        // Access restriction
+        let data = await dataAccess.view('users', req.query._id);
         return data;
     },
     login: function(req, res) {
         console.log('controller called');
     },
-    logout: function(req, res) {
+    search: function(req, res) {
+        // Access restriction
         console.log('controller called');
     },
-    search: function(req, res) {
-        console.log('controller called');
+    activateUser: function(req, res) {
+        // Access restriction
+        dataAccess.update('users', { "_id" : req.body._id, "active": true});
+    },
+    deactivateUser: function(req, res) {   
+        // Access restriction
+        dataAccess.update('users', { "_id" : req.body._id, "active": false});
     }
 };
 
