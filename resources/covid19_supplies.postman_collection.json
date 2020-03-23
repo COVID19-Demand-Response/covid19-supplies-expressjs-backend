@@ -1,0 +1,435 @@
+{
+	"info": {
+		"_postman_id": "21126421-1804-4ffa-b522-5d2568963116",
+		"name": "covid19_supplies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"UCSF Medical Center\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlNzY2ZmIxOTBlZjljZjg4ODk0MzNjMCIsInVzZXJfbmFtZSI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE1ODQ4NDM3MzksImV4cCI6MTU4NDg0NzMzOX0.fI-81e5z27UqnFVFPeNOv8AIDdMwWRbK0BOgKo02DXY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"_id\": \"5e765aead8e7a8de98ed5743\",\n\t\"name\": \"UCSF Medical Center\",\n\t\"email\": \"test@test.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/updateProfile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"updateProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View User Profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlNzY2ZmIxOTBlZjljZjg4ODk0MzNjMCIsInVzZXJfbmFtZSI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE1ODQ4NDM0MTV9.eZvo0lYjx5aQw0o6TDdJEUYD-krE_toQzxEp3aDZE3g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/viewProfile?_id=5e766fb190ef9cf8889433c0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"viewProfile"
+					],
+					"query": [
+						{
+							"key": "_id",
+							"value": "5e766fb190ef9cf8889433c0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unregister User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"_id\": \"5e765aead8e7a8de98ed5743\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/unregister",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"unregister"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Supply Request",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user_id\": \"5e766fad90ef9cf8889433bf\",\n\t\"supply_type\": \"mask\",\n\t\"quantity\": 100,\n\t\"request_date\": \"03/20/2020\",\n\t\"fulfillment_date\": null,\n\t\"urgency\": \"high\",\n\t\"needed_by\": \"03/21/2020\",\n\t\"status\": \"open\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/supplyRequests/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"supplyRequests",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Supply Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"_id\": \"5e76845f040d994dcd863f30\",\n\t\"user_id\": \"5e766fad90ef9cf8889433bf\",\n\t\"supply_type\": \"glove\",\n\t\"quantity\": 150,\n\t\"request_date\": \"03/20/2020\",\n\t\"fulfillment_date\": null,\n\t\"urgency\": \"high\",\n\t\"needed_by\": \"03/21/2020\",\n\t\"status\": \"open\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/supplyRequests/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"supplyRequests",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Supply Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"_id\": \"5e76845f040d994dcd863f30\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/supplyRequests/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"supplyRequests",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Supply Request",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/supplyRequests/view?_id=5e76845d040d994dcd863f2f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"supplyRequests",
+						"view"
+					],
+					"query": [
+						{
+							"key": "_id",
+							"value": "5e76845d040d994dcd863f2f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Inventory",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/inventory/view?_id=5e7689da0cbc945fb94cdc98",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"view"
+					],
+					"query": [
+						{
+							"key": "_id",
+							"value": "5e7689da0cbc945fb94cdc98"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Inventory",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"_id\": \"5e7689d10cbc945fb94cdc95\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/inventory/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Inventory",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"_id\": \"5e7689da0cbc945fb94cdc98\",\n\t\"user_id\": \"5e766fad90ef9cf8889433bf\",\n\t\"supply_type\": \"glove\",\n\t\"quantity\": 100,\n\t\"status\": \"ready\",\n\t\"available_date\": \"03/23/2020\",\n\t\"price\": 125,\n\t\"address_line1\": \"\",\n\t\"address_line2\": \"\",\n\t\"city\": \"\",\n\t\"state\": \"\",\n\t\"country\": \"\",\n\t\"zipcode\": \"\",\n\t\"latitude\": \"\",\n\t\"longitude\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/inventory/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Inventory",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user_id\": \"5e766fad90ef9cf8889433bf\",\n\t\"supply_type\": \"glove\",\n\t\"quantity\": 100,\n\t\"status\": \"in_progress\",\n\t\"available_date\": \"03/23/2020\",\n\t\"price\": 125,\n\t\"address_line1\": \"\",\n\t\"address_line2\": \"\",\n\t\"city\": \"\",\n\t\"state\": \"\",\n\t\"country\": \"\",\n\t\"zipcode\": \"\",\n\t\"latitude\": \"\",\n\t\"longitude\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/inventory/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user_name\": \"test@test.com\",\n\t\"password\": \"test123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
