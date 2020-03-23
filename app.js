@@ -33,7 +33,8 @@ app.use('/inventory', inventoryRouter);
 
 app.constants = {
   db: {
-    url: 'mongodb://localhost:27017/'
+    url: 'mongodb://localhost:27017/',
+    database: 'covid19'
   }
 }
 
@@ -55,7 +56,7 @@ app.use(function(err, req, res, next) {
 
 MongoClient.connect(app.constants.db.url, function (err, database) {
   if (err) throw err;
-  dbMgr.dbConnection = database.db('covid19');
+  dbMgr.dbConnection = database.db(app.constants.db.database);
   dbMgr.dbConnection.collection('users').find().toArray(function (err, result) {
     if (err) throw err;
     console.log('Successfully connect to Mongo instance at ' + app.constants.db.url);
