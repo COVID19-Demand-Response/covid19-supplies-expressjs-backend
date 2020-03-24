@@ -73,6 +73,7 @@ let mongoDataAccess = {
     search: async function(collection, criteria) {
         let results = [];
         try {
+            console.log(criteria);
             let cursor = dbMgr.dbConnection.collection(collection).find(
                 mongoDataAccess.constructQuery(criteria),
                 {}
@@ -82,7 +83,7 @@ let mongoDataAccess = {
         } catch(err) {
             console.log(err);
         };
-        console.log(results);
+        
         return results;
     },
     constructQuery: function(criteria) {
