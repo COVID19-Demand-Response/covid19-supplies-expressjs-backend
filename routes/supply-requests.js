@@ -20,6 +20,11 @@ router.get('/view', auth.authenticate(), async function(req, res, next) {
   res.send({status: true, data: data});
 });
 
+router.get('/search', auth.authenticate(), async function(req, res, next) {
+  let data = await supplyRequestController.search(req, res);
+  res.send({status: true, data: data});
+});
+
 // Login
 router.post('/delete', auth.authenticate(), function(req, res, next) {
   supplyRequestController.delete(req, res);

@@ -19,13 +19,15 @@ let supplyRequestController = {
         let data = await dataAccess.view('supply_request', req.query._id);
         return data;
     },
-    search: function(req, res) {
-        console.log('controller called');
+    search: async function(req, res) {
+        let data = await dataAccess.search('supply_request', req.body);
+        return data;
     },
     initializeForUpdate: function(supply_request) {
-        delete supply_request.user_id;
+        
         delete supply_request.created_by;
         delete supply_request.created_date;
+
         return supply_request;
     }
 };

@@ -18,11 +18,12 @@ let inventoryController = {
         let data = await dataAccess.view('inventory', req.query._id);
         return data;
     },
-    search: function(req, res) {
-        console.log('controller called');
+    search: async function(req, res) {
+        let data = await dataAccess.search('inventory', req.body);
+        return data;
     },
     initializeForUpdate: function(inventory) {
-        delete inventory.user_id;
+        
         delete inventory.created_by;
         delete inventory.created_date;
         return inventory;

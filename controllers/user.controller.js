@@ -29,9 +29,9 @@ let userController = {
     login: function(req, res) {
         console.log('controller called');
     },
-    search: function(req, res) {
-        // Access restriction
-        console.log('controller called');
+    search: async function(req, res) {
+        let data = await dataAccess.search('users', req.body);
+        return data;
     },
     activateUser: function(req, res) {
         // Access restriction

@@ -70,8 +70,23 @@ let mongoDataAccess = {
 
         return doc;
     },
-    search: function(collection, criteria) {
-        console.log('controller called');
+    search: async function(collection, criteria) {
+        let results = [];
+        try {
+            let cursor = dbMgr.dbConnection.collection(collection).find(
+                mongoDataAccess.constructQuery(criteria),
+                {}
+            ).sort(criteria.sort).skip((criteria.page > 1 ? criteria.page - 1 : 0) * criteria.pageSize).limit(criteria.pageSize);
+            
+            await cursor.forEach(data => results.push(data));
+        } catch(err) {
+            console.log(err);
+        };
+        console.log(results);
+        return results;
+    },
+    constructQuery: function(criteria) {
+        return {};
     }
 };
 
