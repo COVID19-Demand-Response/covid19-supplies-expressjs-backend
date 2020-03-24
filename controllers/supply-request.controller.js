@@ -8,7 +8,9 @@ let supplyRequestController = {
         dataAccess.add('supply_request', req.body);
     },
     update: function(req, res) {
-        dataAccess.update('supply_request', req.body);
+
+        let supply_request = this.initializeForUpdate(supply_request);
+        dataAccess.update('supply_request', supply_request);
     },
     delete: function(req, res) {
         dataAccess.delete('supply_request', req.body._id);
@@ -19,6 +21,12 @@ let supplyRequestController = {
     },
     search: function(req, res) {
         console.log('controller called');
+    },
+    initializeForUpdate: function(supply_request) {
+        delete supply_request.user_id;
+        delete supply_request.created_by;
+        delete supply_request.created_date;
+        return supply_request;
     }
 };
 

@@ -8,8 +8,8 @@ let inventoryController = {
         dataAccess.add('inventory', req.body);
     },
     update: function(req, res) {
-
-        dataAccess.update('inventory', req.body);
+        let inventory = this.initializeForUpdate(req.body);
+        dataAccess.update('inventory', inventory);
     },
     delete: function(req, res) {
         dataAccess.delete('inventory', req.body._id);
@@ -20,6 +20,12 @@ let inventoryController = {
     },
     search: function(req, res) {
         console.log('controller called');
+    },
+    initializeForUpdate: function(inventory) {
+        delete inventory.user_id;
+        delete inventory.created_by;
+        delete inventory.created_date;
+        return inventory;
     }
 };
 

@@ -18,7 +18,8 @@ let userController = {
     },
     updateProfile: function(req, res) {
         // Access restriction
-        dataAccess.update('users', req.body);
+        let user = initializeForUpdate(req.body);
+        dataAccess.update('users', user);
     },
     viewProfile: async function(req, res) {
         // Access restriction
@@ -39,6 +40,14 @@ let userController = {
     deactivateUser: function(req, res) {   
         // Access restriction
         dataAccess.update('users', { "_id" : req.body._id, "active": false});
+    },
+    initializeForUpdate: function(user) {
+        delete user.created_by;
+        delete user.created_date;
+        delete user.email;
+        delete user.user_name;
+        delete user.password;
+        return user;
     }
 };
 
