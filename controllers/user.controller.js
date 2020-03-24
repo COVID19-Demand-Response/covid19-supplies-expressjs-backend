@@ -18,7 +18,7 @@ let userController = {
     },
     updateProfile: function(req, res) {
         // Access restriction
-        let user = initializeForUpdate(req.body);
+        let user = userController.initializeForUpdate(req.body);
         dataAccess.update('users', user);
     },
     viewProfile: async function(req, res) {

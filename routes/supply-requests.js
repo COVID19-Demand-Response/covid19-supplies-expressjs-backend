@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const supplyRequestController = require('../controllers/supply-request.controller.js');
-var auth = require("../security/auth");
+var auth = require("../security/auth.js");
 
 // Update password
 router.put('/add', auth.authenticate(), function(req, res, next) {

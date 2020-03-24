@@ -11,8 +11,12 @@ var supplyRequestRouter = require('./routes/supply-requests');
 var inventoryRouter = require('./routes/inventory');
 var auth = require("./security/auth");
 var dbMgr = require('./data-access/db-manager');
+var cors = require('cors');
 
 var app = express();
+
+/// DANGER DANGER DANGER Remove this code before moving to production
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

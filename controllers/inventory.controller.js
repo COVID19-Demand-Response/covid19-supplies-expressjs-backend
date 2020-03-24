@@ -8,7 +8,7 @@ let inventoryController = {
         dataAccess.add('inventory', req.body);
     },
     update: function(req, res) {
-        let inventory = this.initializeForUpdate(req.body);
+        let inventory = inventoryController.initializeForUpdate(req.body);
         dataAccess.update('inventory', inventory);
     },
     delete: function(req, res) {

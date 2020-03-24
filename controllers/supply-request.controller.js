@@ -9,7 +9,7 @@ let supplyRequestController = {
     },
     update: function(req, res) {
 
-        let supply_request = this.initializeForUpdate(supply_request);
+        let supply_request = supplyRequestController.initializeForUpdate(supply_request);
         dataAccess.update('supply_request', supply_request);
     },
     delete: function(req, res) {

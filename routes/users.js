@@ -26,7 +26,7 @@ router.get('/viewProfile', auth.authenticate(), async function(req, res, next) {
 
 router.post('/login',  async function(req, res) {
 
-    let user = await dataAccess.find(app, 'users', {'user_name': req.body.user_name});
+    let user = await dataAccess.find('users', {'user_name': req.body.user_name});
     
     if(user && req.body.password == user.password) {
       var payload = {

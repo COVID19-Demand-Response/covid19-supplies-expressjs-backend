@@ -1,6 +1,7 @@
 const passport = require('passport');
 var passportJWT = require("passport-jwt");
 var cfg = require("./jwtConfig.js");
+const jwt = require('jsonwebtoken');
 var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = require('passport-jwt').Strategy;
 
@@ -12,14 +13,13 @@ opts.issuer = cfg.issuer;
 
 passport.use(new JwtStrategy(opts, async function(jwt_payload, done) {
     
-    try {
-        let user = await dataAccess.find(null, 'users', {'user_name': jwt_payload.user_name});
-
+    try {        
+        let user = await dataAccess.find('users', {'user_name': jwt_payload.user_name});
+        
         if (user) {
-            return done(null, user);
-        } else {
-            return done(null, false);
+            return done(null, true);
         }
+        return done(null, false);
     } catch(err) {
         return done(err, false);
     }
